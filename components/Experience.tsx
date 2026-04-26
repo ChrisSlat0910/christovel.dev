@@ -253,6 +253,16 @@ export default function Experience() {
   // cleanup on unmount
   useEffect(() => () => clearTimer(), []);
 
+  // Lock body scroll while a card is expanded
+  useEffect(() => {
+    if (activeId !== null) {
+      document.body.style.overflow = 'hidden';
+    } else {
+      document.body.style.overflow = '';
+    }
+    return () => { document.body.style.overflow = ''; };
+  }, [activeId]);
+
   const isOther = (id: CardId) => activeId !== null && activeId !== id;
 
   return (
