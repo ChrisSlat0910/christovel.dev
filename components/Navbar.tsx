@@ -60,7 +60,7 @@ export default function Navbar() {
         className="flex items-center justify-center hover:opacity-80 transition-opacity group shrink-0" 
         style={{ fontFamily: 'var(--font-logo)' }}
       >
-        <div className={`flex items-center justify-center rounded-lg bg-white text-black font-bold tracking-tighter transition-all duration-500 shrink-0 ${scrolled ? 'w-10 h-10 text-xl' : 'w-9 h-9 lg:w-8 lg:h-8 mr-0 lg:mr-2 text-lg lg:text-base'}`}>
+        <div className={`flex items-center justify-center rounded-lg bg-white text-black font-bold tracking-tighter transition-all duration-500 shrink-0 ${scrolled ? 'w-9 h-9 sm:w-10 sm:h-10 text-xl' : 'w-8 h-8 lg:w-8 lg:h-8 mr-0 lg:mr-2 text-base lg:text-base'}`}>
           C<span className="text-gray-500">S</span>
         </div>
         <span className={`text-white transition-all duration-500 font-medium tracking-tight overflow-hidden hidden lg:block ${scrolled ? 'w-0 opacity-0' : 'w-auto opacity-100 text-xl'}`}>
@@ -72,7 +72,7 @@ export default function Navbar() {
       <div className="w-px h-6 bg-white/10 block lg:hidden mx-1" />
 
       {/* Nav Links */}
-      <div className={`flex items-center ${scrolled ? 'flex-row lg:flex-col gap-5 lg:gap-6' : 'flex-row gap-5 lg:gap-8'}`}>
+      <div className={`flex items-center ${scrolled ? 'flex-row lg:flex-col gap-2 sm:gap-4 lg:gap-6' : 'flex-row gap-2 sm:gap-4 lg:gap-8'}`}>
         {navLinks.map(l => (
           <a key={l.name} href={l.href} className="group relative flex items-center justify-center">
             {/* Horizontal Text: Only on Desktop Not Scrolled */}
@@ -112,13 +112,13 @@ export default function Navbar() {
 
       {/* CTA Button */}
       <a href="#contact" className="group relative flex items-center justify-center shrink-0">
-        <div className={`flex items-center justify-center transition-all duration-300 ${scrolled ? 'w-10 h-10 rounded-full bg-white text-black hover:scale-110' : 'w-9 h-9 lg:w-auto lg:h-auto lg:px-5 lg:py-2.5 rounded-full bg-white text-black text-sm font-bold lg:hover:scale-105 shadow-[0_0_20px_rgba(255,255,255,0.2)]'}`}>
+        <div className={`flex items-center justify-center transition-all duration-300 ${scrolled ? 'w-9 h-9 sm:w-10 sm:h-10 rounded-full bg-white text-black hover:scale-110' : 'w-8 h-8 sm:w-9 sm:h-9 lg:w-auto lg:h-auto lg:px-5 lg:py-2.5 rounded-full bg-white text-black text-sm font-bold lg:hover:scale-105 shadow-[0_0_20px_rgba(255,255,255,0.2)]'}`}>
           {scrolled ? (
             <FiCalendar size={18} />
           ) : (
             <>
               <span className="hidden lg:block">Book a Call</span>
-              <FiCalendar size={18} className="block lg:hidden" />
+              <FiCalendar size={16} className="block lg:hidden" />
             </>
           )}
         </div>

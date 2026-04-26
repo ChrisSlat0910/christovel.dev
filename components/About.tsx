@@ -29,7 +29,7 @@ const experienceList = [
 
 export default function About() {
   return (
-    <section id="about" className="section-about py-24 relative">
+    <section id="about" className="section-about py-24 relative overflow-hidden">
       <div className="max-w-5xl mx-auto px-6 md:px-10">
 
         {/* Top small badge — hidden intentionally */}
@@ -111,7 +111,7 @@ export default function About() {
               Full Stack Developer with a strong focus on backend engineering. I build production-ready systems using Java Spring Boot, PostgreSQL, and Redis and ship complete products when the project calls for it.
             </p>
 
-            <div className="flex flex-wrap gap-3 mb-14 border-b border-white/[0.04] pb-12">
+            <div className="flex flex-wrap gap-3 mb-14 border-b border-white/[0.04] pb-12 overflow-hidden">
               {skillsData.map((tech, i) => (
                 <div
                   key={i}

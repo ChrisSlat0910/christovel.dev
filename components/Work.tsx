@@ -138,6 +138,7 @@ function ProjectCard({ project, index, onClick }: { project: any, index: number,
       }}
       initial={{ scale: 0.96 }}
       whileHover={{ scale: 1.02, zIndex: 20 }}
+      whileTap={{ scale: 0.97, transition: { duration: 0.12 } }}
       transition={{ duration: 0.4, ease: "easeOut" }}
       className="relative group border border-white/[0.08] bg-[#0A0A0A] flex flex-col cursor-pointer rounded-4xl overflow-hidden w-full h-[540px] shadow-xl"
       style={{
@@ -170,8 +171,8 @@ function ProjectCard({ project, index, onClick }: { project: any, index: number,
           {String(index + 1).padStart(2, '0')}
         </div>
 
-        {/* Hover Arrow */}
-        <div className="absolute top-4 right-4 w-9 h-9 rounded-full bg-white text-black flex items-center justify-center opacity-0 group-hover:opacity-100 translate-y-4 group-hover:translate-y-0 transition-all duration-300 shadow-xl">
+        {/* Hover Arrow — Desktop only */}
+        <div className="absolute top-4 right-4 w-9 h-9 rounded-full bg-white text-black items-center justify-center hidden md:flex opacity-0 group-hover:opacity-100 translate-y-4 group-hover:translate-y-0 transition-all duration-300 shadow-xl">
            <FiArrowUpRight size={16} />
         </div>
       </div>
@@ -236,7 +237,7 @@ export default function Work() {
   }, [selectedProject]);
 
   return (
-    <section id="work" className="section-work py-24 relative">
+    <section id="work" className="section-work py-24 relative overflow-hidden">
       <div className="max-w-7xl mx-auto px-6 md:px-10">
 
         {/* Header */}
@@ -290,7 +291,7 @@ export default function Work() {
               </button>
 
               {/* Left Side: Info */}
-              <div className="w-full lg:w-[40%] p-6 md:p-10 lg:p-12 border-b lg:border-b-0 lg:border-r border-white/10 flex flex-col bg-[#050505] lg:overflow-y-auto shrink-0 [&::-webkit-scrollbar]:hidden">
+              <div className="w-full lg:w-[40%] min-w-0 p-6 md:p-10 lg:p-12 border-b lg:border-b-0 lg:border-r border-white/10 flex flex-col bg-[#050505] lg:overflow-y-auto shrink-0 [&::-webkit-scrollbar]:hidden">
                 <div className="flex flex-wrap items-center gap-3 mb-5 mt-6 lg:mt-0">
                   <span className="px-2.5 py-1 rounded-full bg-white/10 text-white/70 text-[10px] font-bold tracking-widest uppercase border border-white/10">{selectedProject.year}</span>
                   <span className="text-white/40 text-[10px] font-bold uppercase tracking-widest">{selectedProject.category}</span>
@@ -298,7 +299,7 @@ export default function Work() {
 
                 <h2 className="text-4xl lg:text-5xl font-bold text-white tracking-tight mb-6 leading-[1.1]">{selectedProject.title}</h2>
                 
-                <p className="text-white/60 text-[15px] leading-relaxed mb-10">
+                <p className="text-white/60 text-[15px] leading-relaxed mb-10 break-words whitespace-normal">
                   {selectedProject.description}
                 </p>
 
@@ -317,8 +318,8 @@ export default function Work() {
                   <ul className="flex flex-col gap-2.5 pt-4 border-t border-white/5">
                     {selectedProject.techStackText.map((tech: string, i: number) => (
                       <li key={i} className="flex items-start gap-3 text-white/50 text-[13px]">
-                         <span className="text-white/20 mt-1">▹</span>
-                         {tech}
+                         <span className="text-white/20 mt-1 shrink-0">▹</span>
+                         <span className="break-words whitespace-normal min-w-0">{tech}</span>
                       </li>
                     ))}
                   </ul>
@@ -329,8 +330,8 @@ export default function Work() {
                   <ul className="flex flex-col gap-3">
                     {selectedProject.highlights.map((highlight: string, i: number) => (
                       <li key={i} className="flex items-start gap-3 text-white/80 text-[15px]">
-                         <span className="text-[#39ff14]/70 mt-1"><FiArrowUpRight size={14} /></span>
-                         <span className="leading-relaxed">{highlight}</span>
+                         <span className="text-[#39ff14]/70 mt-1 shrink-0"><FiArrowUpRight size={14} /></span>
+                         <span className="leading-relaxed break-words whitespace-normal min-w-0">{highlight}</span>
                       </li>
                     ))}
                   </ul>
@@ -361,7 +362,7 @@ export default function Work() {
               </div>
 
               {/* Right Side: Gallery */}
-              <div className="w-full lg:w-[60%] p-6 md:p-10 lg:p-12 bg-[#0c0c0c] lg:overflow-y-auto [&::-webkit-scrollbar]:hidden flex flex-col gap-8 lg:gap-12 pb-16 lg:pb-12">
+              <div className="w-full lg:w-[60%] min-w-0 p-6 md:p-10 lg:p-12 bg-[#0c0c0c] lg:overflow-y-auto [&::-webkit-scrollbar]:hidden flex flex-col gap-8 lg:gap-12 pb-16 lg:pb-12">
                 {selectedProject.gallery.map((img: string, i: number) => (
                   <img 
                     key={i} 

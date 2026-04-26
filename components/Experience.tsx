@@ -2,6 +2,7 @@
 
 import { useState, useRef, useEffect } from 'react';
 import { motion, AnimatePresence } from 'motion/react';
+import { FiX, FiMaximize2 } from 'react-icons/fi';
 import {
   SiReact, SiNextdotjs, SiTypescript, SiTailwindcss,
   SiFramer, SiGit, SiPostgresql, SiSpringboot,
@@ -51,16 +52,25 @@ type CardId = 1 | 2 | 3 | 4;
 const cardDelays: Record<CardId, number> = { 1: 0.05, 2: 0.15, 3: 0.25, 4: 0.35 };
 
 /* ─── COLLAPSED TECH STACK (tall card, row-span-2) ──────────── */
-function CollapsedCard2() {
+function CollapsedCard2({ onExpand }: { onExpand: () => void }) {
   return (
     <div className="absolute inset-0 flex flex-col p-6 overflow-hidden">
-      {/* Header */}
-      <div className="mb-5">
-        <span className="text-[10px] text-[#555] uppercase tracking-widest font-medium">02</span>
-        <h3 className="text-xl font-bold text-white mt-1" style={{ fontFamily: 'var(--font-logo)' }}>
-          Tech Stack
-        </h3>
-        <p className="text-[11px] text-[#555] mt-0.5">Core technologies I master</p>
+      {/* Header row */}
+      <div className="flex items-start justify-between mb-5">
+        <div>
+          <span className="text-[10px] text-[#555] uppercase tracking-widest font-medium">02</span>
+          <h3 className="text-xl font-bold text-white mt-1" style={{ fontFamily: 'var(--font-logo)' }}>
+            Tech Stack
+          </h3>
+          <p className="text-[11px] text-[#555] mt-0.5">Core technologies I master</p>
+        </div>
+        {/* Expand button */}
+        <button
+          onClick={(e) => { e.stopPropagation(); onExpand(); }}
+          className="w-8 h-8 shrink-0 rounded-full bg-white/[0.06] border border-white/10 flex items-center justify-center text-white/40 hover:text-white hover:bg-white/10 transition-all"
+        >
+          <FiMaximize2 size={13} />
+        </button>
       </div>
 
       {/* Divider */}
@@ -88,14 +98,21 @@ function CollapsedCard2() {
 
 /* ─── COLLAPSED IMAGE CARD ───────────────────────────────────── */
 function CollapsedImageCard({
-  num, title, summary, image,
-}: { num: string; title: string; summary: string; image: string }) {
+  num, title, summary, image, onExpand,
+}: { num: string; title: string; summary: string; image: string; onExpand: () => void }) {
   return (
     <div className="absolute inset-0 overflow-hidden rounded-3xl">
       {/* eslint-disable-next-line @next/next/no-img-element */}
       <img src={image} alt={title} className="w-full h-full object-cover opacity-60 transition-opacity duration-500" />
       <div className="absolute inset-0 bg-gradient-to-t from-[#080808] via-[#080808]/60 to-transparent" />
       <span className="absolute top-6 left-6 text-[10px] text-[#aaa] uppercase tracking-widest font-medium drop-shadow-lg">{num}</span>
+      {/* Expand button */}
+      <button
+        onClick={(e) => { e.stopPropagation(); onExpand(); }}
+        className="absolute top-4 right-4 w-8 h-8 rounded-full bg-black/40 backdrop-blur-sm border border-white/10 flex items-center justify-center text-white/60 hover:text-white hover:bg-black/60 transition-all"
+      >
+        <FiMaximize2 size={13} />
+      </button>
       <div className="absolute bottom-6 left-6 right-6 drop-shadow-lg">
         <h3 className="text-xl font-bold text-white mb-1" style={{ fontFamily: 'var(--font-logo)' }}>{title}</h3>
         <p className="text-xs text-[#ddd] leading-relaxed">{summary}</p>
@@ -239,7 +256,7 @@ export default function Experience() {
   const isOther = (id: CardId) => activeId !== null && activeId !== id;
 
   return (
-    <section id="experience" className="section-experience py-24 relative">
+    <section id="experience" className="section-experience py-24 relative overflow-hidden">
       <div className="max-w-6xl mx-auto px-6 md:px-10">
 
         {/* ── Header ── */}
@@ -284,10 +301,10 @@ export default function Experience() {
               whileInView={{ opacity: 1, y: 0, scale: 1 }}
               viewport={{ once: true }}
               transition={{ delay: cardDelays[1], duration: 0.55, ease: [0.22, 1, 0.36, 1] }}
-              className="md:col-span-8 md:row-span-1 h-[280px] relative rounded-3xl"
+              className="order-2 md:col-start-1 md:col-span-8 md:row-start-1 md:row-span-1 h-[280px] relative rounded-3xl"
             >
               <motion.div
-                className="absolute inset-0 rounded-3xl overflow-hidden border border-white/[0.04] cursor-pointer bg-[#0C0C0C] hover:border-white/[0.08] transition-colors"
+                className="absolute inset-0 rounded-3xl overflow-hidden border border-white/[0.04] bg-[#0C0C0C] hover:border-white/[0.08] transition-colors"
                 onMouseEnter={() => handleEnter(1)}
                 animate={{
                   opacity: isOther(1) ? 0 : 1,
@@ -301,6 +318,7 @@ export default function Experience() {
                   title="Backend Systems"
                   summary="REST API design, authentication, rate limiting, and business logic, built with Java and Spring Boot."
                   image="https://images.unsplash.com/photo-1555066931-4365d14bab8c?q=80&w=800&auto=format&fit=crop"
+                  onExpand={() => setActiveId(1)}
                 />
               </motion.div>
             </motion.div>
@@ -311,10 +329,10 @@ export default function Experience() {
               whileInView={{ opacity: 1, y: 0, scale: 1 }}
               viewport={{ once: true }}
               transition={{ delay: cardDelays[2], duration: 0.55, ease: [0.22, 1, 0.36, 1] }}
-              className="md:col-span-4 md:row-span-2 h-[360px] md:h-auto relative rounded-3xl"
+              className="order-1 md:col-start-9 md:col-span-4 md:row-start-1 md:row-span-2 h-[360px] md:h-auto relative rounded-3xl"
             >
               <motion.div
-                className="absolute inset-0 rounded-3xl overflow-hidden border border-white/[0.04] cursor-pointer bg-[#0A0A0A] hover:border-white/[0.08] transition-colors"
+                className="absolute inset-0 rounded-3xl overflow-hidden border border-white/[0.04] bg-[#0A0A0A] hover:border-white/[0.08] transition-colors"
                 onMouseEnter={() => handleEnter(2)}
                 animate={{
                   opacity: isOther(2) ? 0 : 1,
@@ -323,7 +341,7 @@ export default function Experience() {
                 }}
                 transition={{ duration: 0.4, ease: [0.22, 1, 0.36, 1] }}
               >
-                <CollapsedCard2 />
+                <CollapsedCard2 onExpand={() => setActiveId(2)} />
               </motion.div>
             </motion.div>
 
@@ -333,10 +351,10 @@ export default function Experience() {
               whileInView={{ opacity: 1, y: 0, scale: 1 }}
               viewport={{ once: true }}
               transition={{ delay: cardDelays[3], duration: 0.55, ease: [0.22, 1, 0.36, 1] }}
-              className="md:col-span-4 md:row-span-1 h-[280px] relative rounded-3xl"
+              className="order-3 md:col-start-1 md:col-span-4 md:row-start-2 md:row-span-1 h-[280px] relative rounded-3xl"
             >
               <motion.div
-                className="absolute inset-0 rounded-3xl overflow-hidden border border-white/[0.04] cursor-pointer bg-[#0C0C0C] hover:border-white/[0.08] transition-colors"
+                className="absolute inset-0 rounded-3xl overflow-hidden border border-white/[0.04] bg-[#0C0C0C] hover:border-white/[0.08] transition-colors"
                 onMouseEnter={() => handleEnter(3)}
                 animate={{
                   opacity: isOther(3) ? 0 : 1,
@@ -350,6 +368,7 @@ export default function Experience() {
                   title="Database & Infrastructure"
                   summary="Schema design, versioned migrations, and cloud deployment with Docker, Railway, and Vercel."
                   image="https://images.unsplash.com/photo-1561070791-2526d30994b5?q=80&w=800&auto=format&fit=crop"
+                  onExpand={() => setActiveId(3)}
                 />
               </motion.div>
             </motion.div>
@@ -360,10 +379,10 @@ export default function Experience() {
               whileInView={{ opacity: 1, y: 0, scale: 1 }}
               viewport={{ once: true }}
               transition={{ delay: cardDelays[4], duration: 0.55, ease: [0.22, 1, 0.36, 1] }}
-              className="md:col-span-4 md:row-span-1 h-[280px] relative rounded-3xl"
+              className="order-4 md:col-start-5 md:col-span-4 md:row-start-2 md:row-span-1 h-[280px] relative rounded-3xl"
             >
               <motion.div
-                className="absolute inset-0 rounded-3xl overflow-hidden border border-white/[0.04] cursor-pointer bg-[#0C0C0C] hover:border-white/[0.08] transition-colors"
+                className="absolute inset-0 rounded-3xl overflow-hidden border border-white/[0.04] bg-[#0C0C0C] hover:border-white/[0.08] transition-colors"
                 onMouseEnter={() => handleEnter(4)}
                 animate={{
                   opacity: isOther(4) ? 0 : 1,
@@ -377,6 +396,7 @@ export default function Experience() {
                   title="Full Stack Delivery"
                   summary="End-to-end product development from backend API to responsive frontend, shipped to production."
                   image="https://images.unsplash.com/photo-1551288049-bebda4e38f71?q=80&w=800&auto=format&fit=crop"
+                  onExpand={() => setActiveId(4)}
                 />
               </motion.div>
             </motion.div>
@@ -393,8 +413,15 @@ export default function Experience() {
                 exit={{ opacity: 0, scale: 0.95 }}
                 transition={{ duration: 0.38, ease: [0.22, 1, 0.36, 1] }}
                 className="absolute inset-0 z-50 rounded-[2rem] overflow-hidden border border-white/10 shadow-[0_40px_120px_rgba(0,0,0,0.95)]"
-                style={{ background: '#080808', cursor: 'default' }}
+                style={{ background: '#080808', cursor: 'pointer' }}
+                onClick={() => setActiveId(null)}
               >
+                <button 
+                  onClick={(e) => { e.stopPropagation(); setActiveId(null); }}
+                  className="absolute top-4 right-4 md:top-6 md:right-6 z-[60] w-8 h-8 flex items-center justify-center rounded-full bg-white/10 text-white/70 hover:bg-white/20 hover:text-white transition-colors"
+                >
+                  <FiX size={16} />
+                </button>
                 {activeId === 1 && (
                   <ExpandedImageCard
                     num="01"

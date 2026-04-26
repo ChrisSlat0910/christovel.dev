@@ -223,11 +223,11 @@ export default function Contact() {
                 {/* Email */}
                 <a
                   href="mailto:chrisslat9@gmail.com"
-                  className="group flex items-center gap-2 mb-2.5 hover:opacity-80 transition-opacity"
+                  className="group flex items-center gap-2 mb-2.5 hover:opacity-80 transition-opacity min-w-0"
                 >
-                  <FiMail size={12} className="text-white/30" />
-                  <span className="text-sm text-white font-medium">chrisslat9@gmail.com</span>
-                  <FiArrowUpRight size={12} className="text-white/20 group-hover:text-white/50 transition-colors" />
+                  <FiMail size={12} className="text-white/30 shrink-0" />
+                  <span className="text-sm text-white font-medium truncate">chrisslat9@gmail.com</span>
+                  <FiArrowUpRight size={12} className="text-white/20 group-hover:text-white/50 transition-colors shrink-0" />
                 </a>
 
                 {/* LinkedIn */}
@@ -235,11 +235,11 @@ export default function Contact() {
                   href="https://linkedin.com/in/christovelslat"
                   target="_blank"
                   rel="noopener noreferrer"
-                  className="group flex items-center gap-2 mb-2.5 hover:opacity-80 transition-opacity"
+                  className="group flex items-center gap-2 mb-2.5 hover:opacity-80 transition-opacity min-w-0"
                 >
-                  <FaLinkedin size={12} className="text-[#0A66C2]" />
-                  <span className="text-sm text-white/70">linkedin.com/in/christovelslat</span>
-                  <FiArrowUpRight size={12} className="text-white/20 group-hover:text-white/50 transition-colors" />
+                  <FaLinkedin size={12} className="text-[#0A66C2] shrink-0" />
+                  <span className="text-sm text-white/70 truncate">linkedin.com/in/christovelslat</span>
+                  <FiArrowUpRight size={12} className="text-white/20 group-hover:text-white/50 transition-colors shrink-0" />
                 </a>
 
                 {/* GitHub */}
@@ -247,11 +247,11 @@ export default function Contact() {
                   href="https://github.com/ChrisSlat0910"
                   target="_blank"
                   rel="noopener noreferrer"
-                  className="group flex items-center gap-2 hover:opacity-80 transition-opacity"
+                  className="group flex items-center gap-2 hover:opacity-80 transition-opacity min-w-0"
                 >
-                  <FaGithub size={12} className="text-white/60" />
-                  <span className="text-sm text-white/70">github.com/ChrisSlat0910</span>
-                  <FiArrowUpRight size={12} className="text-white/20 group-hover:text-white/50 transition-colors" />
+                  <FaGithub size={12} className="text-white/60 shrink-0" />
+                  <span className="text-sm text-white/70 truncate">github.com/ChrisSlat0910</span>
+                  <FiArrowUpRight size={12} className="text-white/20 group-hover:text-white/50 transition-colors shrink-0" />
                 </a>
               </div>
             </div>
@@ -337,7 +337,7 @@ export default function Contact() {
                   Christovel Slat
                 </span>
               </div>
-              <p className="text-white/25 text-xs">Backend-Focused Full Stack Developer · Manado, North Sulawesi, Indonesia</p>
+              <p className="text-white/25 text-xs leading-relaxed">Backend-Focused Full Stack Developer<br className="sm:hidden" /> · Manado, North Sulawesi, Indonesia</p>
             </div>
 
             {/* Nav links */}
