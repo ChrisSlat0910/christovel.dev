@@ -1,0 +1,155 @@
+@import url('https://fonts.googleapis.com/css2?family=Outfit:wght@300;400;500;600;700&family=Syne:wght@500;600;700;800&display=swap');
+@import "tailwindcss";
+
+@theme {
+  --font-sans: "Outfit", ui-sans-serif, system-ui, sans-serif;
+  --font-logo: "Syne", sans-serif;
+
+  --color-bg:      #080808;
+  --color-surface: #111111;
+  --color-raised:  #1A1A1A;
+  --color-border:  rgba(255,255,255,0.07);
+  --color-text:    #FFFFFF;
+  --color-muted:   #888888;
+  --color-faint:   #2E2E2E;
+
+  /* backward compat */
+  --color-arctic-bg:      var(--color-bg);
+  --color-arctic-surface: var(--color-surface);
+  --color-arctic-accent:  var(--color-text);
+  --color-arctic-text:    var(--color-text);
+}
+
+*, *::before, *::after { box-sizing: border-box; }
+html { scroll-behavior: smooth; }
+
+body {
+  background-color: #080808;
+  color: #FFFFFF;
+  font-family: var(--font-sans);
+  overflow-x: hidden;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+
+/* ── FLUID ANIMATED ORB BACKGROUNDS ──────────────────────── 
+   Using pseudo-elements so gradients can be fluidly animated 
+   across the page without performance drops, blending seamlessly
+   into a single holistic page identity.
+   ─────────────────────────────────────────────── */
+
+.section-hero::before,
+.section-about::before,
+.section-work::before,
+.section-experience::before,
+.section-contact::before {
+  content: "";
+  position: absolute;
+  inset: -30%;
+  z-index: -1;
+  pointer-events: none;
+  animation: fluid-orb 25s ease-in-out infinite alternate;
+  /* Feather the literal edges of the container so gradients never have sharp boundaries */
+  mask-image: radial-gradient(ellipse at center, black 20%, transparent 70%);
+  -webkit-mask-image: radial-gradient(ellipse at center, black 20%, transparent 70%);
+}
+
+@keyframes fluid-orb {
+  0%   { transform: translateY(0%)  scale(1);   opacity: 0.6; }
+  50%  { transform: translateY(3%)  scale(1.05); opacity: 1;   }
+  100% { transform: translateY(-3%) scale(0.95); opacity: 0.8; }
+}
+
+.section-hero::before {
+  /* Radiant spotlight from above — representing illumination and introduction */
+  background: radial-gradient(ellipse 100% 100% at 50% -20%, rgba(200,200,200,0.12) 0%, transparent 60%);
+  animation-duration: 20s;
+}
+
+.section-about::before {
+  /* Two intertwined soft orbs — representing personality and human touch */
+  background: 
+    radial-gradient(circle at -5% 40%, rgba(200,200,200,0.06) 0%, transparent 50%),
+    radial-gradient(circle at 105% 70%, rgba(200,200,200,0.04) 0%, transparent 45%);
+  animation-duration: 25s;
+  animation-direction: alternate-reverse;
+}
+
+.section-work::before {
+  /* Angled sweep and conic sharpness — representing structure, logic, and building projects */
+  background: 
+    radial-gradient(ellipse 100% 60% at 50% 50%, rgba(200,200,200,0.04) 0%, transparent 70%),
+    conic-gradient(from 180deg at 100% 100%, transparent 0deg, rgba(200,200,200,0.06) 90deg, transparent 180deg);
+  animation-duration: 30s;
+}
+
+.section-experience::before {
+  /* Soft vertical cascades/pillars — representing foundation and services */
+  background: 
+    linear-gradient(to bottom, transparent, rgba(200,200,200,0.03) 40%, rgba(200,200,200,0.05) 60%, transparent),
+    radial-gradient(ellipse 120% 100% at -20% 50%, rgba(200,200,200,0.05) 0%, transparent 65%);
+  animation-duration: 22s;
+  animation-direction: alternate-reverse;
+}
+
+.section-contact::before {
+  /* A glowing stage from the bottom up — representing an invitation to connect */
+  background: radial-gradient(ellipse 120% 100% at 50% 120%, rgba(200,200,200,0.08) 0%, transparent 70%);
+  animation-duration: 18s;
+}
+
+/* ── SHARED UTILITIES ── */
+.card {
+  background: #111111;
+  border: 1px solid rgba(255,255,255,0.07);
+  border-radius: 1rem;
+}
+
+.card-raised {
+  background: #1A1A1A;
+  border: 1px solid rgba(255,255,255,0.07);
+  border-radius: 1rem;
+}
+
+.label {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.4rem;
+  font-size: 0.7rem;
+  font-weight: 500;
+  letter-spacing: 0.04em;
+  color: #888888;
+}
+
+.btn-white {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.5rem;
+  padding: 0.6rem 1.25rem;
+  border-radius: 999px;
+  background: #FFFFFF;
+  color: #000000;
+  font-size: 0.8rem;
+  font-weight: 600;
+  transition: background 0.2s, opacity 0.2s;
+  white-space: nowrap;
+}
+.btn-white:hover { background: rgba(255,255,255,0.88); }
+
+.btn-outline {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.5rem;
+  padding: 0.6rem 1.25rem;
+  border-radius: 999px;
+  background: transparent;
+  border: 1px solid rgba(255,255,255,0.18);
+  color: #FFFFFF;
+  font-size: 0.8rem;
+  font-weight: 500;
+  transition: border-color 0.2s, background 0.2s;
+  white-space: nowrap;
+}
+.btn-outline:hover { border-color: rgba(255,255,255,0.4); background: rgba(255,255,255,0.04); }
+
+::selection { background: rgba(255,255,255,0.25); color: #000; }

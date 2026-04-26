@@ -1,0 +1,29 @@
+﻿
+> react-example@0.0.0 build
+> next build
+
+   Γû▓ Next.js 15.2.0
+
+   Creating an optimized production build ...
+ Γ£ô Compiled successfully
+   Linting and checking validity of types ...
+   Collecting page data ...
+   Generating static pages (0/4) ...
+   Generating static pages (1/4) 
+   Generating static pages (2/4) 
+   Generating static pages (3/4) 
+ Γ£ô Generating static pages (4/4)
+   Finalizing page optimization ...
+   Collecting build traces ...
+
+Route (app)                              Size     First Load JS
+Γöî Γùï /                                    69 kB           186 kB
+Γöö Γùï /_not-found                          978 B           118 kB
++ First Load JS shared by all            117 kB
+  Γö£ chunks/4bd1b696-9b52698da6adfd25.js  53 kB
+  Γö£ chunks/587-f86ca1e23818dd11.js       62.3 kB
+  Γöö other shared chunks (total)          1.95 kB
+
+
+Γùï  (Static)  prerendered as static content
+
