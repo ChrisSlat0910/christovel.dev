@@ -71,7 +71,7 @@ export default function About() {
 
             <div className="px-1">
               <h3 className="text-2xl font-semibold text-white mb-2">Hi, I'm Christovel Slat</h3>
-              <p className="text-white/50 text-base mb-6">Backend-Focused Full Stack Developer.</p>
+              <p className="text-white/50 text-base mb-6">Frontend-Focused Full Stack Developer.</p>
               
               <div className="flex gap-3 mb-8">
                 {socials.map((s, i) => (
@@ -108,7 +108,7 @@ export default function About() {
             style={{ background: '#0D0D0D', border: '1px solid rgba(255,255,255,0.06)' }}
           >
             <p className="text-white/80 text-base md:text-lg leading-relaxed mb-10">
-              Full Stack Developer with a strong focus on backend engineering. I build production-ready systems using Java Spring Boot, PostgreSQL, and Redis and ship complete products when the project calls for it.
+              Full Stack Developer with a strong focus on frontend engineering. I build polished, performant UIs using React, Next.js, and TypeScript and wire them to production-ready backends when the project calls for it.
             </p>
 
             <div className="flex flex-wrap gap-3 mb-14 border-b border-white/[0.04] pb-12 overflow-hidden">

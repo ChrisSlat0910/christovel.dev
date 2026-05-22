@@ -232,6 +232,8 @@ function ExpandedImageCard({
 export default function Experience() {
   const [activeId, setActiveId] = useState<CardId | null>(null);
   const hoverTimer = useRef<ReturnType<typeof setTimeout> | null>(null);
+  // Tracks whether the current expanded card was opened via explicit button tap (not hover)
+  const explicitOpen = useRef(false);
 
   const clearTimer = () => {
     if (hoverTimer.current) {
@@ -242,26 +244,31 @@ export default function Experience() {
 
   const handleEnter = (id: CardId) => {
     clearTimer();
+    explicitOpen.current = false; // this is hover-triggered
     hoverTimer.current = setTimeout(() => setActiveId(id), HOVER_DELAY_MS);
   };
 
   const handleGridLeave = () => {
     clearTimer();
+    // Only auto-close if it was opened via hover, not by an explicit tap/click
+    if (!explicitOpen.current) {
+      setActiveId(null);
+    }
+  };
+
+  const handleExplicitOpen = (id: CardId) => {
+    clearTimer();
+    explicitOpen.current = true;
+    setActiveId(id);
+  };
+
+  const handleClose = () => {
+    explicitOpen.current = false;
     setActiveId(null);
   };
 
   // cleanup on unmount
   useEffect(() => () => clearTimer(), []);
-
-  // Lock body scroll while a card is expanded
-  useEffect(() => {
-    if (activeId !== null) {
-      document.body.style.overflow = 'hidden';
-    } else {
-      document.body.style.overflow = '';
-    }
-    return () => { document.body.style.overflow = ''; };
-  }, [activeId]);
 
   const isOther = (id: CardId) => activeId !== null && activeId !== id;
 
@@ -293,7 +300,7 @@ export default function Experience() {
             </p>
           </div>
           <div className="pb-2 shrink-0">
-            <a href="#contact" className="btn-white text-xs py-2.5 px-5">Download Resume</a>
+            <a href="/Christovel_Clever_Slat_Frontend_CV.pdf" download className="btn-white text-xs py-2.5 px-5">Download Resume</a>
           </div>
         </motion.div>
 
@@ -325,10 +332,10 @@ export default function Experience() {
               >
                 <CollapsedImageCard
                   num="01"
-                  title="Backend Systems"
-                  summary="REST API design, authentication, rate limiting, and business logic, built with Java and Spring Boot."
+                  title="Frontend Systems"
+                  summary="Component architecture, UI animations, and responsive design — built with React, Next.js, and TypeScript."
                   image="https://images.unsplash.com/photo-1555066931-4365d14bab8c?q=80&w=800&auto=format&fit=crop"
-                  onExpand={() => setActiveId(1)}
+                  onExpand={() => handleExplicitOpen(1)}
                 />
               </motion.div>
             </motion.div>
@@ -351,7 +358,7 @@ export default function Experience() {
                 }}
                 transition={{ duration: 0.4, ease: [0.22, 1, 0.36, 1] }}
               >
-                <CollapsedCard2 onExpand={() => setActiveId(2)} />
+                <CollapsedCard2 onExpand={() => handleExplicitOpen(2)} />
               </motion.div>
             </motion.div>
 
@@ -378,7 +385,7 @@ export default function Experience() {
                   title="Database & Infrastructure"
                   summary="Schema design, versioned migrations, and cloud deployment with Docker, Railway, and Vercel."
                   image="https://images.unsplash.com/photo-1561070791-2526d30994b5?q=80&w=800&auto=format&fit=crop"
-                  onExpand={() => setActiveId(3)}
+                  onExpand={() => handleExplicitOpen(3)}
                 />
               </motion.div>
             </motion.div>
@@ -404,9 +411,9 @@ export default function Experience() {
                 <CollapsedImageCard
                   num="04"
                   title="Full Stack Delivery"
-                  summary="End-to-end product development from backend API to responsive frontend, shipped to production."
+                  summary="End-to-end product development from UI design to deployment — delivering complete, production-ready products."
                   image="https://images.unsplash.com/photo-1551288049-bebda4e38f71?q=80&w=800&auto=format&fit=crop"
-                  onExpand={() => setActiveId(4)}
+                  onExpand={() => handleExplicitOpen(4)}
                 />
               </motion.div>
             </motion.div>
@@ -423,11 +430,11 @@ export default function Experience() {
                 exit={{ opacity: 0, scale: 0.95 }}
                 transition={{ duration: 0.38, ease: [0.22, 1, 0.36, 1] }}
                 className="absolute inset-0 z-50 rounded-[2rem] overflow-hidden border border-white/10 shadow-[0_40px_120px_rgba(0,0,0,0.95)]"
-                style={{ background: '#080808', cursor: 'pointer' }}
-                onClick={() => setActiveId(null)}
+                style={{ background: '#080808', cursor: 'default' }}
+                onClick={handleClose}
               >
                 <button 
-                  onClick={(e) => { e.stopPropagation(); setActiveId(null); }}
+                  onClick={(e) => { e.stopPropagation(); handleClose(); }}
                   className="absolute top-4 right-4 md:top-6 md:right-6 z-[60] w-8 h-8 flex items-center justify-center rounded-full bg-white/10 text-white/70 hover:bg-white/20 hover:text-white transition-colors"
                 >
                   <FiX size={16} />
@@ -435,14 +442,16 @@ export default function Experience() {
                 {activeId === 1 && (
                   <ExpandedImageCard
                     num="01"
-                    title="Backend Systems"
-                    tagline="Scalable APIs and robust business logic built for production."
-                    desc="Specializing in Java and Spring Boot to create secure, reliable backend infrastructure with comprehensive features and architecture."
+                    title="Frontend Systems"
+                    tagline="Crafting high-performance, accessible, and pixel-perfect web interfaces."
+                    desc="Specializing in React and Next.js to deliver scalable, type-safe, and visually engaging frontend applications."
                     image="https://images.unsplash.com/photo-1555066931-4365d14bab8c?q=80&w=1600&auto=format&fit=crop"
                     miniCards={[
-                      { title: 'REST APIs', desc: 'Clean architecture, solid business rules, and strict validation patterns.' },
-                      { title: 'Security & Auth', desc: 'Secure backend configurations, role-based access control, and endpoint protection.' },
-                      { title: 'Performance', desc: 'Smart caching with Redis, request throttling, and background jobs processing.' },
+                      { title: 'Responsive Design', desc: 'Crafting fluid layouts that look and feel great across all screen sizes and devices.' },
+                      { title: 'Component Architecture', desc: 'Building reusable, composable React components with clean state management and minimal re-renders.' },
+                      { title: 'UI/UX Engineering', desc: 'Translating designs into pixel-perfect, accessible interfaces with smooth animations and interactions.' },
+                      { title: 'Performance & Optimization', desc: 'Code-splitting, lazy loading, and Core Web Vitals optimization for fast, responsive experiences.' },
+                      { title: 'Frontend Integration', desc: 'Seamlessly connecting modern React/Next.js UIs to REST APIs and backend services.' },
                     ]}
                   />
                 )}

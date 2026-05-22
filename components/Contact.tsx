@@ -337,7 +337,7 @@ export default function Contact() {
                   Christovel Slat
                 </span>
               </div>
-              <p className="text-white/25 text-xs leading-relaxed">Backend-Focused Full Stack Developer<br className="sm:hidden" /> · Manado, North Sulawesi, Indonesia</p>
+              <p className="text-white/25 text-xs leading-relaxed">Frontend-Focused Full Stack Developer<br className="sm:hidden" /> · Manado, North Sulawesi, Indonesia</p>
             </div>
 
             {/* Nav links */}

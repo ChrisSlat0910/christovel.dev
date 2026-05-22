@@ -26,7 +26,7 @@ export default function Hero() {
             </h1>
 
             <div className="text-xl sm:text-2xl lg:text-3xl text-[#888] font-normal mb-10 whitespace-normal sm:whitespace-nowrap" style={{ fontFamily: '"DM Serif Display", Georgia, serif' }}>
-              Backend-Focused <span className="text-white/20 mx-2">·</span> <span className="text-white/60">Open to Work 2026</span>
+              Frontend-Focused <span className="text-white/20 mx-2">·</span> <span className="text-white/60">Open to Work 2026</span>
             </div>
 
             <div className="text-xl font-medium text-[#E2E5EF] mb-14">
